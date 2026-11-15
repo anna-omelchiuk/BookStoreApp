@@ -1,0 +1,49 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Додати нову книгу";
+}
+
+<div class="form-container">
+    <h1>Додавання нової книги</h1>
+    <form asp-action="Create" method="post" class="styled-form">
+        <div class="form-group">
+            <label asp-for="Title">Назва книги</label>
+            <input asp-for="Title" required />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Author">Автор</label>
+            <input asp-for="Author" required />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Genre">Жанр</label>
+            <select asp-for="Genre" required>
+                <option value="Наукова фантастика">Наукова фантастика</option>
+                <option value="Пригодницькі романи">Пригодницькі романи</option>
+                <option value="Детективи">Детективи</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Price">Ціна (грн)</label>
+            <input asp-for="Price" type="number" step="0.01" required />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description">Короткий опис</label>
+            <textarea asp-for="Description" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="imageUrlsRaw">Посилання на зображення (вставте кілька URL, кожне з нового рядка)</label>
+            <textarea id="imageUrlsRaw" name="imageUrlsRaw" rows="4" required
+                      placeholder="https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg&#10;https://covers.openlibrary.org/b/isbn/9780340960196-L.jpg"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-accent">Зберегти книгу</button>
+            <a asp-action="Index" class="btn-outline">Скасувати</a>
+        </div>
+    </form>
+</div>

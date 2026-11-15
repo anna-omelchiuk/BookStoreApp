@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Book>
+@{
+    ViewData["Title"] = "Каталог книг";
+}
+
+<section class="catalog-intro">
+    <h1>Каталог книг</h1>
+    <p>Оберіть книгу.</p>
+</section>
+
+@await Component.InvokeAsync("GenreStats", new { selectedGenre = ViewBag.SelectedGenre })
+
+<div class="books-grid">
+    @foreach (var book in Model)
+    {
+        var coverUrl = book.Images.FirstOrDefault()?.ImageUrl ?? "https://via.placeholder.com/200x300?text=No+Cover";
+        <article class="book-card">
+            <div class="book-cover-wrapper">
+                <img src="@coverUrl" alt="@book.Title" class="book-cover" />
+                <span class="badge-genre">@book.Genre</span>
+            </div>
+            <div class="book-info">
+                <h2 class="book-title">@book.Title</h2>
+                <p class="book-author">Автор: <strong>@book.Author</strong></p>
+                <p class="book-meta">Фото: @book.Images.Count | Коментарів: @book.Comments.Count</p>
+                <div class="book-footer">
+                    <span class="book-price">@book.Price.ToString("0.00") грн</span>
+                    <a asp-action="Details" asp-route-id="@book.Id" class="btn-outline">Детальніше</a>
+                </div>
+            </div>
+        </article>
+    }
+</div>
